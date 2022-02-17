@@ -31,3 +31,72 @@ ul.submenu > li a{
 ul.submenu{
     padding: 0 1.25rem;
 }
+svg{
+    width: 12px;
+    margin-left: 10px;
+}
+ul.menu a:hover path,
+ul.menu a:hover rect,
+ul.menu a:hover polygon,
+ul.menu a:hover{
+    fill: tomato;
+    color: tomato;
+}
+svg path,
+svg rect,
+svg polygon{
+    fill:#f5f5f5;
+}
+
+@media screen and (min-width: 60rem) {
+    ul.menu{
+        display: flex;
+    }
+    ul.menu li{
+        flex-grow: 1;
+        flex-shrink: 0;
+        flex-basis: auto;
+        text-align: center;
+    }
+    /* step 2: postition and style the dropdown menu and then hide it */
+    ul.submenu{
+        padding: 0;
+        /* when using  position absolute, the element is removed from the document laylout - 
+        the space it took up is now gone*/
+        position: absolute;
+        top: 55px;
+        /* left: 0; */
+        right: 0;
+        background-color: #191919;
+        border-radius: 0 0 5px 5px;
+        /* hide the submenu but make the accessiable to sreen readers and keybords */
+        visibility: hidden;
+        opacity: 0;
+        /* step 4: when at a transition state added to the element that is changing before*/
+        transition: all 0.5s ease;
+    }
+    /*  when positioning and absolute item, make the parent element position relative to 
+    position in relation to that element and not the viewport */
+    ul.menu li{
+        position: relative;
+        white-space: nowrap;
+    }
+    /* step 3: add hover states that show the submenus */
+    ul.menu li:hover > ul {
+        visibility: visible;
+        opacity: 1;
+    }
+    /* step 5: add accessibility with the :focus-within state on the li elements */
+    ul.menu li:focus-within > ul,
+    ul.menu li > ul:focus {
+        visibility: visible;
+        opacity: 1;
+        display: block;
+    }
+}
+
+@media screen and (max-width: 60rem){
+    svg{
+        visibility: hidden;
+    }
+}
